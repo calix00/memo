@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="/css/login.css" rel="stylesheet" >
+
+        <title>로그인</title>
+    </head>
+    <body>
+        <div id="form-container">
+            <div id="form-inner-container">
+                <!-- Sign up form -->
+                <div id="sign-up-container">
+                    <h3>Sign Up</h3>
+                    <form action="/signup" th:object="${memberDto}" method="post">
+                        <label for="name">Name</label>
+                        <input type="text" name="name" id="name" placeholder="Name" th:field="*{name}">
+                        <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" style="color:red;margin-top:-10px;margin-bottom:20px"></div>
+
+                        <label for="email">Email</label>
+                        <input type="email" name="email" id="email" placeholder="Email" th:field="*{email}">
+                        <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" style="color:red;margin-top:-10px;margin-bottom:20px"></div>
+
+                        <label for="password">Password</label>
+                        <input type="password" name="pw" id="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;" th:field="*{pw}">
+                        <div th:if="${#fields.hasErrors('pw')}" th:errors="*{pw}" style="color:red;margin-top:-10px;margin-bottom:20px"></div>
+
+                        <div id="form-controls">
+                            <button type="submit">Sign Up</button>
+                            <button type="button" id="toggleSignIn">Sign In</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Sign in form -->
+                <div id="sign-in-container" class="hide">
+                    <h3>Sign In</h3>
+                    <form action="/login" method="post">
+                        <label for="email">Email</label>
+                        <input type="text" name="email" id="email1" placeholder="user@example.com">
+
+                        <label for="password">Password</label>
+                        <input type="password" name="pw" id="password1" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;">
+
+                        <div id="form-controls1">
+                            <button type="submit">Sign In</button>
+                            <button type="button" id="toggleSignUp">Sign Up</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Lottie animation -->
+                <div id="animation-container">
+                    <lottie-player src="https://assets3.lottiefiles.com/packages/lf20_aesgckiv.json"  background="transparent"  speed="1"  style="width: 520px; height: 520px;" loop autoplay></lottie-player>
+                </div>
+            </div>
+        </div>
+        <script th:inline="javascript">
+            let msg = [[${msg}]];
+            if(msg) alert(msg);
+        </script>
+        <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+        <script src="/js/login.js"></script>
+    </body>
+</html>
